@@ -136,9 +136,9 @@ $tmp_special_price = $product_price;
     global $db;
 // Dual Pricing stat
       $product_check = $db->Execute("select products_price, products_price_w, products_priced_by_attribute from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
-// Dual Pricing end
+
 // is there a products_price to add to attributes
-// Dual Pricing start
+
 if ($_SESSION['customer_whole']) {
 		if ($_SESSION['customer_whole'] != '0') {
 			$i = (int)$_SESSION['customer_whole'];
@@ -210,7 +210,6 @@ if ($_SESSION['customer_whole']) {
 //****************************************************************
 //*****Generate Net Retail Price for Displaying with Trade Price
 //****************************************************************
-////
 // computes products_price + option groups lowest attributes price of each group when on
   function zen_get_products_retail_net_price($products_id) {
     global $db;
@@ -219,7 +218,7 @@ if ($_SESSION['customer_whole']) {
 // is there a products_price to add to attributes
       $retail_net_price = $product_check->fields['products_price'];
 
-      // do not select display only attributes and attributes_price_base_included is true
+// do not select display only attributes and attributes_price_base_included is true
       $product_att_query = $db->Execute("select options_id, price_prefix, options_values_price, attributes_display_only, attributes_price_base_included from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$products_id . "' and attributes_display_only != '1' and attributes_price_base_included='1'". " order by options_id, price_prefix, options_values_price");
 
       $the_options_id= 'x';
@@ -1332,10 +1331,9 @@ if ($_SESSION['customer_whole']) {
 } else {
 $options_values_price = $pre_selected->fields['options_values_price'];
 }
-// Dual Pricing end		
+		
 		
     if ($pre_selected->fields["price_prefix"] == '-') {
-// Dual Pricing start
       $attributes_price_final -= $options_values_price;
     } else {
 

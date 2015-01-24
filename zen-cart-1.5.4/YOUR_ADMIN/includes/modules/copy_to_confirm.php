@@ -1,10 +1,10 @@
 <?php
 /**
  * @package admin
- * @copyright Copyright 2003-2009 Zen Cart Development Team
+ * @copyright Copyright 2003-2014 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: copy_to_confirm.php 14139 2009-08-10 13:46:02Z wilt $
+ * @version GIT: $Id: Author: DrByte  Jun 30 2014 Modified in v1.5.4 $
  */
 if (!defined('IS_ADMIN_FLAG')) {
   die('Illegal Access');
@@ -34,9 +34,10 @@ if (!defined('IS_ADMIN_FLAG')) {
             }
           } elseif ($_POST['copy_as'] == 'duplicate') {
             $old_products_id = (int)$products_id;
-//Dual Pricing
             $product = $db->Execute("select products_type, products_quantity, products_model, products_image,
+// Dual Pricing start
                                             products_price, products_price_w, products_virtual, products_date_available, products_weight,
+// Dual Pricing end
                                             products_tax_class_id, manufacturers_id,
                                             products_quantity_order_min, products_quantity_order_units, products_priced_by_attribute,
                                             product_is_free, product_is_call, products_quantity_mixed,
@@ -49,16 +50,18 @@ if (!defined('IS_ADMIN_FLAG')) {
             $products_quantity = (!zen_not_null($tmp_value) || $tmp_value=='' || $tmp_value == 0) ? 0 : $tmp_value;
             $tmp_value = zen_db_input($product->fields['products_price']);
             $products_price = (!zen_not_null($tmp_value) || $tmp_value=='' || $tmp_value == 0) ? 0 : $tmp_value;
-//Dual Pricing
+// Dual Pricing start
             $tmp_value = zen_db_input($product->fields['products_price_w']);
             $products_price_w = (!zen_not_null($tmp_value) || $tmp_value=='' || $tmp_value == 0) ? 0 : $tmp_value;
+// Dual Pricing end
             $tmp_value = zen_db_input($product->fields['products_weight']);
             $products_weight = (!zen_not_null($tmp_value) || $tmp_value=='' || $tmp_value == 0) ? 0 : $tmp_value;
 
-//Dual Pricing
             $db->Execute("insert into " . TABLE_PRODUCTS . "
                                       (products_type, products_quantity, products_model, products_image,
+// Dual Pricing start
                                        products_price, products_price_w, products_virtual, products_date_added, products_date_available,
+// Dual Pricing end
                                        products_weight, products_status, products_tax_class_id,
                                        manufacturers_id,
                                        products_quantity_order_min, products_quantity_order_units, products_priced_by_attribute,
@@ -71,7 +74,9 @@ if (!defined('IS_ADMIN_FLAG')) {
                                   '" . zen_db_input($product->fields['products_model']) . "',
                                   '" . zen_db_input($product->fields['products_image']) . "',
                                   '" . $products_price . "',
+// Dual Pricing start
 				  '" . $products_price_w . "',
+// Dual Pricing end
                                   '" . zen_db_input($product->fields['products_virtual']) . "',
                                   now(),
                                   '" . (zen_not_null(zen_db_input($product->fields['products_date_available'])) ? zen_db_input($product->fields['products_date_available']) : '0001-01-01 00:00:00') . "',

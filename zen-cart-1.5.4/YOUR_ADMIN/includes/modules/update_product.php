@@ -26,7 +26,7 @@
     $products_weight = (!zen_not_null($tmp_value) || $tmp_value=='' || $tmp_value == 0) ? 0 : $tmp_value;
     $tmp_value = zen_db_prepare_input($_POST['manufacturers_id']);
     $manufacturers_id = (!zen_not_null($tmp_value) || $tmp_value=='' || $tmp_value == 0) ? 0 : $tmp_value;
-//Dual Pricing
+// Dual Pricing start
     $tmp_value = $_POST['products_price_w'];
     $products_price_w = ($tmp_value == '' || !zen_not_null($tmp_value)) ? 0 : $tmp_value;
     $sql_data_array = array('products_quantity' => $products_quantity,
@@ -34,6 +34,7 @@
                             'products_model' => zen_db_prepare_input($_POST['products_model']),
                             'products_price' => $products_price,
 			    'products_price_w' => $products_price_w,
+// Dual Pricing end
                             'products_date_available' => $products_date_available,
                             'products_weight' => $products_weight,
                             'products_status' => zen_db_prepare_input((int)$_POST['products_status']),

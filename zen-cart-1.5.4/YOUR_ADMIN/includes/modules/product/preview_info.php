@@ -15,11 +15,12 @@ if (!defined('IS_ADMIN_FLAG')) {
       $products_description = $_POST['products_description'];
       $products_url = $_POST['products_url'];
     } else {
-	//Dual Pricing
       $product = $db->Execute("select p.products_id, pd.language_id, pd.products_name,
                                       pd.products_description, pd.products_url, p.products_quantity,
+// Dual Pricing start
                                       p.products_model, p.products_image, p.products_price, p.product_price_w, p.products_virtual,
-                                      p.products_weight, p.products_date_added, p.products_last_modified,
+
+// Dual Pricing end                                      p.products_weight, p.products_date_added, p.products_last_modified,
                                       p.products_date_available, p.products_status, p.manufacturers_id,
                                       p.products_quantity_order_min, p.products_quantity_order_units, p.products_priced_by_attribute,
                                       p.product_is_free, p.product_is_call, p.products_quantity_mixed,
@@ -54,7 +55,9 @@ if (!defined('IS_ADMIN_FLAG')) {
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo zen_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . zen_output_string_protected($pInfo->products_name); ?></td>
+// Dual Pricing start
             <td class="pageHeading" align="right"><?php echo $currencies->format($pInfo->products_price) . $currencies->format($pInfo->products_price_w) . ($pInfo->products_virtual == 1 ? '<span class="errorText">' . '<br />' . TEXT_VIRTUAL_PREVIEW . '</span>' : '') . ($pInfo->product_is_always_free_shipping == 1 ? '<span class="errorText">' . '<br />' . TEXT_FREE_SHIPPING_PREVIEW . '</span>' : '') . ($pInfo->products_priced_by_attribute == 1 ? '<span class="errorText">' . '<br />' . TEXT_PRODUCTS_PRICED_BY_ATTRIBUTES_PREVIEW . '</span>' : '') . ($pInfo->product_is_free == 1 ? '<span class="errorText">' . '<br />' . TEXT_PRODUCTS_IS_FREE_PREVIEW . '</span>' : '') . ($pInfo->product_is_call == 1 ? '<span class="errorText">' . '<br />' . TEXT_PRODUCTS_IS_CALL_PREVIEW . '</span>' : '') . ($pInfo->products_qty_box_status == 0 ? '<span class="errorText">' . '<br />' . TEXT_PRODUCTS_QTY_BOX_STATUS_PREVIEW . '</span>' : '') . ($pInfo->products_priced_by_attribute == 1 ? '<br />' . zen_get_products_display_price($_GET['pID']) : ''); ?></td>
+// Dual Pricing end
           </tr>
         </table></td>
       </tr>

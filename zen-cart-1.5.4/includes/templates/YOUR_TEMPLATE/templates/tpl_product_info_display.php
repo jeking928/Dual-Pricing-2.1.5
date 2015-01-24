@@ -6,10 +6,10 @@
  * Displays details of a typical product
  *
  * @package templateSystem
- * @copyright Copyright 2003-2011 Zen Cart Development Team
+ * @copyright Copyright 2003-2014 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: tpl_product_info_display.php 19690 2011-10-04 16:41:45Z drbyte $
+ * @version $Id:  $
  */
  //require(DIR_WS_MODULES . '/debug_blocks/product_info_prices.php');
 ?>
@@ -63,6 +63,7 @@ require($template->get_template_dir('/tpl_products_next_previous.php',DIR_WS_TEM
 <h2 id="productPrices" class="productGeneral">
 <?php
 // base price
+// Dual Pricing start
 //***********************************************************************
 //***DISPLAY NET RETAIL PRICE IF WHOLESALE CUSTOMER IS LOGGED ON
 //***********************************************************************
@@ -92,6 +93,7 @@ if ($_SESSION['customer_whole'] && $_SESSION['customer_whole'] != '0' ) {
 //*********************************************************************************
 //***END Properly display price labeling when set to Whole sale and when not
 //*********************************************************************************
+// Dual Pricing end
 ?></h2>
 <!--eof Product Price block -->
 
@@ -236,7 +238,7 @@ if (CUSTOMERS_APPROVAL == 3 and TEXT_LOGIN_FOR_PRICE_BUTTON_REPLACE_SHOWROOM == 
   if (zen_not_null($products_url)) {
     if ($flag_show_product_info_url == 1) {
 ?>
-    <p id="productInfoLink" class="productGeneral centeredContent"><?php echo sprintf(TEXT_MORE_INFORMATION, zen_href_link(FILENAME_REDIRECT, 'action=url&goto=' . urlencode($products_url), 'NONSSL', true, false)); ?></p>
+    <p id="productInfoLink" class="productGeneral centeredContent"><?php echo sprintf(TEXT_MORE_INFORMATION, zen_href_link(FILENAME_REDIRECT, 'action=product&products_id=' . zen_output_string_protected($_GET['products_id']), 'NONSSL', true, false)); ?></p>
 <?php
     } // $flag_show_product_info_url
   }

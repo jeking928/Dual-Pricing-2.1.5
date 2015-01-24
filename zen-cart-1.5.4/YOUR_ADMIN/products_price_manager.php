@@ -143,10 +143,11 @@
     $tmp_value = zen_db_prepare_input($_POST['products_price_sorter']);
     $products_price_sorter = (!zen_not_null($tmp_value) || $tmp_value=='' || $tmp_value == 0) ? 0 : $tmp_value;
 
-//Dual Pricing
         $sql = "update " . TABLE_PRODUCTS . " set
             products_price=:price:,
-			products_price_w=:priceW:,
+// Dual Pricing start
+            products_price_w=:priceW:,
+// Dual Pricing end
             products_tax_class_id=:taxClass:,
             products_date_available=:dateAvailable:,
             products_last_modified=now(),
@@ -166,7 +167,9 @@
             where products_id='" . $products_filter . "'";
 
         $sql = $db->bindVars($sql, ':price:', $_POST['products_price'], 'string');
-		$sql = $db->bindVars($sql, ':priceW:', $_POST['products_price_w'], 'string');
+// Dual Pricing start
+        $sql = $db->bindVars($sql, ':priceW:', $_POST['products_price_w'], 'string');
+// Dual Pricing end
         $sql = $db->bindVars($sql, ':taxClass:', $_POST['products_tax_class_id'], 'integer');
         $sql = $db->bindVars($sql, ':dateAvailable:', $products_date_available, 'string');
         $sql = $db->bindVars($sql, ':status:', $_POST['products_status'], 'integer');
@@ -193,8 +196,9 @@
             $products_price = zen_get_products_base_price($products_filter);
           } else {
             $products_price = zen_db_prepare_input($_POST['products_price']);
-//Dual Pricing
+// Dual Pricing start
 	    $products_price_w = zen_db_prepare_input($_POST['products_price_w']);
+// Dual Pricing end
           }
 
           $specials_price = zen_db_prepare_input($_POST['specials_price']);
@@ -225,10 +229,11 @@
         for ($i=1, $n=sizeof($_POST['discount_qty']); $i<=$n; $i++) {
           if ($_POST['discount_qty'][$i] > 0) {
             $new_id++;
-//Dual Pricing
             $db->Execute("insert into " . TABLE_PRODUCTS_DISCOUNT_QUANTITY . "
+// Dual Pricing start
                           (discount_id, products_id, discount_qty, discount_price, discount_price_w)
                           values ('" . $new_id . "', '" . $products_filter . "', '" . zen_db_input($_POST['discount_qty'][$i]) . "', '" . zen_db_input($_POST['discount_price'][$i]) . "', '" . zen_db_input($_POST['discount_price_w'][$i]) . "')");
+// Dual Pricing end
             $discount_cnt++;
           } else {
             loop;
@@ -457,9 +462,10 @@ if ($products_filter == '') {
       }
 
 // products information
-//Dual Pricing
       $product = $db->Execute("select p.products_id, p.products_model,
+// Dual Pricing start
                                       p.products_price, p.products_price_w, p.products_date_available,
+// Dual Pricing end
                                       p.products_tax_class_id,
                                       p.products_quantity_order_min, products_quantity_order_units, p.products_quantity_order_max,
                                       p.product_is_free, p.product_is_call, p.products_quantity_mixed, p.products_priced_by_attribute, p.products_status,
@@ -687,7 +693,9 @@ if (zen_get_product_is_linked($products_filter) == 'true') {
 if (zen_get_product_is_linked($products_filter) == 'false' and $pInfo->master_categories_id != zen_get_products_category_id($products_filter)) {
 ?>
           <tr>
+// Dual Pricing start
             <td colspan="8" class="main"><span class="alert">
+// Dual Pricing end
               <?php echo sprintf(TEXT_INFO_MASTER_CATEGORIES_ID_WARNING, $pInfo->master_categories_id, zen_get_products_category_id($products_filter)); ?></span>
               <br /><strong><?php echo sprintf(TEXT_INFO_MASTER_CATEGORIES_ID_UPDATE_TO_CURRENT, $pInfo->master_categories_id, zen_get_products_category_id($products_filter)); ?></strong>
             </td>
@@ -705,8 +713,9 @@ echo zen_draw_hidden_field('master_categories_id', $pInfo->master_categories_id)
           <tr>
             <td class="main" width="200"><?php echo TEXT_PRODUCTS_PRICE_INFO; ?></td>
             <td class="main"><?php echo TEXT_PRICE . '<br />' . zen_draw_input_field('products_price', (isset($pInfo->products_price) ? $pInfo->products_price : '')); ?></td>
-	<!--Dual Pricing-->
+// Dual Pricing start
 	    <td class="main"><?php echo TEXT_PRICE_W . '<br />' . zen_draw_input_field('products_price_w', (isset($pInfo->products_price_w) ? $pInfo->products_price_w : '')); ?></td>
+// Dual Pricing end
             <td class="main"><?php echo TEXT_PRODUCT_AVAILABLE_DATE; ?><br /><script language="javascript">ProductStartDate.writeControl(); ProductStartDate.dateFormat="<?php echo DATE_FORMAT_SPIFFYCAL; ?>";</script></td>
             <td colspan="2" class="main"><?php echo zen_draw_radio_field('products_status', '1', $products_in_status) . '&nbsp;' . TEXT_PRODUCT_AVAILABLE . '<br />' . zen_draw_radio_field('products_status', '0', $products_out_status) . '&nbsp;' . TEXT_PRODUCT_NOT_AVAILABLE; ?></td>
           </tr>
@@ -820,7 +829,9 @@ echo zen_draw_hidden_field('master_categories_id', $pInfo->master_categories_id)
   if ($fInfo->status == 0) {
 ?>
           <tr>
+// Dual Pricing start
             <td colspan="8"><?php echo '<span class="errorText">' . TEXT_FEATURED_DISABLED . '</span>'; ?></td>
+// Dual Pricing end
           </tr>
 <?php } ?>
         </table></td>
@@ -848,11 +859,12 @@ echo zen_draw_hidden_field('master_categories_id', $pInfo->master_categories_id)
     $i = 0;
     while (!$discounts_qty->EOF) {
       $i++;
-//Dual Pricing
       $discount_name[] = array('id' => $i,
                                  'discount_qty' => $discounts_qty->fields['discount_qty'],
+// Dual Pricing start
                                  'discount_price' => $discounts_qty->fields['discount_price'], 
 				                 'discount_price_w' => $discounts_qty->fields['discount_price_w']);
+// Dual Pricing end
       $discounts_qty->MoveNext();
     }
 ?>
@@ -862,10 +874,12 @@ echo zen_draw_hidden_field('master_categories_id', $pInfo->master_categories_id)
 ?>
 
           <tr>
+// Dual Pricing start
             <td colspan="8" class="main" valign="top"><?php echo TEXT_PRODUCTS_MIXED_DISCOUNT_QUANTITY; ?>&nbsp;&nbsp;<?php echo zen_draw_radio_field('products_mixed_discount_quantity', '1', $in_products_mixed_discount_quantity==1) . '&nbsp;' . TEXT_YES . '&nbsp;&nbsp;' . zen_draw_radio_field('products_mixed_discount_quantity', '0', $out_products_mixed_discount_quantity) . '&nbsp;' . TEXT_NO; ?></td>
           </tr>
           <tr>
             <td colspan="8" class="main" align="center">
+// Dual Pricing end
               <?php
                 if ($action != '') {
                   echo TEXT_ADD_ADDITIONAL_DISCOUNT . '<br />';
@@ -887,7 +901,9 @@ echo zen_draw_hidden_field('master_categories_id', $pInfo->master_categories_id)
             <td colspan="2" class="main">
               <?php echo TEXT_DISCOUNT_TYPE . ' ' . zen_draw_pull_down_menu('products_discount_type', $discount_type_array, $pInfo->products_discount_type); ?>
             </td>
+// Dual Pricing start
             <td colspan="5" class="main">
+// Dual Pricing end
               <?php echo TEXT_DISCOUNT_TYPE_FROM . ' ' . zen_draw_pull_down_menu('products_discount_type_from', $discount_type_from_array, $pInfo->products_discount_type_from); ?>
             </td>
           </tr>
@@ -895,30 +911,36 @@ echo zen_draw_hidden_field('master_categories_id', $pInfo->master_categories_id)
             <td class="main" align="center"><?php echo TEXT_PRODUCTS_DISCOUNT_QTY_TITLE; ?></td>
             <td class="main" align="center"><?php echo TEXT_PRODUCTS_DISCOUNT_QTY; ?></td>
             <td class="main" align="center"><?php echo TEXT_PRODUCTS_DISCOUNT_PRICE; ?></td>
-	<!-- Dual Pricing -->
+// Dual Pricing start
 	    <td class="main" align="center"><?php echo TEXT_PRODUCTS_DISCOUNT_PRICE_W; ?></td>
+// Dual Pricing end
 <?php
   if (DISPLAY_PRICE_WITH_TAX_ADMIN == 'true') {
 ?>
             <td class="main" align="center"><?php echo TEXT_PRODUCTS_DISCOUNT_PRICE_EACH_TAX; ?></td>
-	<!--Dual Pricing-->
+// Dual Pricing start
 	        <td class="main" align="center"><?php echo TEXT_PRODUCTS_DISCOUNT_PRICE_EACH_TAX_W; ?></td>
+// Dual Pricing end
             <td class="main" align="center"><?php echo TEXT_PRODUCTS_DISCOUNT_PRICE_EXTENDED_TAX; ?></td>
 <?php } else { ?>
             <td class="main" align="center"><?php echo TEXT_PRODUCTS_DISCOUNT_PRICE_EACH; ?></td>
-	<!--Dual Pricing-->
+// Dual Pricing start
 	        <td class="main" align="center"><?php echo TEXT_PRODUCTS_DISCOUNT_PRICE_EACH_W; ?></td>
+
+// Dual Pricing end
             <td class="main" align="center"><?php echo TEXT_PRODUCTS_DISCOUNT_PRICE_EXTENDED; ?></td>
-	<!--Dual Pricing-->
+// Dual Pricing start
 	       <td class="main" align="center"><?php echo TEXT_PRODUCTS_DISCOUNT_PRICE_EXTENDED_W; ?></td>
+// Dual Pricing end
 <?php } ?>
           </tr>
 <?php
 
   $display_priced_by_attributes = zen_get_products_price_is_priced_by_attributes($_GET['products_filter']);
   $display_price = zen_get_products_base_price($_GET['products_filter']);
-//Dual Pricing
+// Dual Pricing start
   $display_price_w = zen_get_products_base_price_w($_GET['products_filter']);
+// Dual Pricing end
   $display_specials_price = zen_get_products_special_price($_GET['products_filter'], false);
 //  $display_sale_price = zen_get_products_special_price($_GET['products_filter'], false);
 
@@ -932,13 +954,13 @@ echo zen_draw_hidden_field('master_categories_id', $pInfo->master_categories_id)
         case '1':
           if ($pInfo->products_discount_type_from == '0') {
             $discounted_price = $display_price - ($display_price * ($discount_name[$i]['discount_price']/100));
-//Dual Pricing
+// Dual Pricing start
 	        $discounted_price_w = $display_price_w - ($display_price_w * ($discount_name[$i]['discount_price_w']/100));
           } else {
             if (!$display_specials_price) {
               $discounted_price = $display_price - ($display_price * ($discount_name[$i]['discount_price']/100));
-//Dual Pricing
-	          $discounted_price_w = $display_price_w - ($display_price_w * ($discount_name[$i]['discount_price_w']/100));
+              $discounted_price_w = $display_price_w - ($display_price_w * ($discount_name[$i]['discount_price_w']/100));
+// Dual Pricing end
             } else {
               $discounted_price = $display_specials_price - ($display_specials_price * ($discount_name[$i]['discount_price']/100));
             }
@@ -949,26 +971,24 @@ echo zen_draw_hidden_field('master_categories_id', $pInfo->master_categories_id)
         case '2':
           if ($pInfo->products_discount_type_from == '0') {
             $discounted_price = $discount_name[$i]['discount_price'];
-//Dual Pricing
+// Dual Pricing start
 	        $discounted_price_w = $discount_name[$i]['discount_price_w'];
           } else {
             $discounted_price = $discount_name[$i]['discount_price'];
-//Dual Pricing
-	        $discounted_price_w = $discount_name[$i]['discount_price_w'];
+            $discounted_price_w = $discount_name[$i]['discount_price_w'];
           }
           break;
         // amount offprice
         case '3':
           if ($pInfo->products_discount_type_from == '0') {
             $discounted_price = $display_price - $discount_name[$i]['discount_price'];
-//Dual Pricing
-	        $discounted_price_w = $display_price_w - $discount_name[$i]['discount_price_w'];
+            $discounted_price_w = $display_price_w - $discount_name[$i]['discount_price_w'];
           } else {
             if (!$display_specials_price) {
               $discounted_price = $display_price - $discount_name[$i]['discount_price'];
-//Dual Pricing
-	          $discounted_price_w = $display_price_w - $discount_name[$i]['discount_price_w'];
-            } else {
+              $discounted_price_w = $display_price_w - $discount_name[$i]['discount_price_w'];
+// Dual Pricing end            
+	    } else {
               $discounted_price = $display_specials_price - $discount_name[$i]['discount_price'];
             }
           }
@@ -979,24 +999,21 @@ echo zen_draw_hidden_field('master_categories_id', $pInfo->master_categories_id)
             <td class="main"><?php echo TEXT_PRODUCTS_DISCOUNT . ' ' . $discount_name[$i]['id']; ?></td>
             <td class="main"><?php echo zen_draw_input_field('discount_qty[' . $discount_name[$i]['id'] . ']', $discount_name[$i]['discount_qty']); ?></td>
             <td class="main"><?php echo zen_draw_input_field('discount_price[' . $discount_name[$i]['id'] . ']', $discount_name[$i]['discount_price']); ?></td>
-	<!--Dual Pricing-->
+// Dual Pricing start
 	        <td class="main"><?php echo zen_draw_input_field('discount_price_w[' . $discount_name[$i]['id'] . ']', $discount_name[$i]['discount_price_w']); ?></td>
 <?php
   if (DISPLAY_PRICE_WITH_TAX == 'true') {
 ?>
             <td class="main" align="right"><?php echo $currencies->display_price($discounted_price, '', 1) . ' ' . $currencies->display_price($discounted_price, zen_get_tax_rate(1), 1); ?></td>
-	<!--Dual Pricing-->
 	    <td class="main" align="right"><?php echo $currencies->display_price_w($discounted_price_w, '', 1) . ' ' . $currencies->display_price_w($discounted_price_w, zen_get_tax_rate(1), 1); ?></td>
             <td class="main" align="right"><?php echo ' x ' . number_format($discount_name[$i]['discount_qty']) . ' = ' . $currencies->display_price($discounted_price, '', $discount_name[$i]['discount_qty']) . ' ' . $currencies->display_price($discounted_price, zen_get_tax_rate(1), $discount_name[$i]['discount_qty']); ?></td>
-	<!--Dual Pricing-->
 	    <td class="main" align="right"><?php echo ' x ' . number_format($discount_name[$i]['discount_qty']) . ' = ' . $currencies->display_price_w($discounted_price_w, '', $discount_name[$i]['discount_qty']) . ' ' . $currencies->display_price_w($discounted_price_w, zen_get_tax_rate(1), $discount_name[$i]['discount_qty']); ?></td>
 <?php } else { ?>
             <td class="main" align="right"><?php echo $currencies->display_price($discounted_price, '', 1); ?></td>
-	<!--Dual Pricing-->
 	    <td class="main" align="right"><?php echo $currencies->display_price($discounted_price_w, '', 1); ?></td>
             <td class="main" align="right"><?php echo ' x ' . number_format($discount_name[$i]['discount_qty']) . ' = ' . $currencies->display_price($discounted_price, '', $discount_name[$i]['discount_qty']); ?></td>
-	<!--Dual Pricing-->
 	    <td class="main" align="right"><?php echo ' x ' . number_format($discount_name[$i]['discount_qty']) . ' = ' . $currencies->display_price($discounted_price_w, '', $discount_name[$i]['discount_qty']); ?></td>
+// Dual Pricing end
 <?php } ?>
           </tr>
 <?php

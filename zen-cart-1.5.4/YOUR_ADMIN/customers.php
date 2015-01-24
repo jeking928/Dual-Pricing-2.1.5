@@ -261,8 +261,8 @@
                                 'customers_newsletter' => $customers_newsletter,
                                 'customers_email_format' => $customers_email_format,
                                 'customers_authorization' => $customers_authorization,
-                                'customers_referral' => $customers_referral,
 // Dual Pricing start
+                                'customers_referral' => $customers_referral,
 				'customers_whole' => $customers_whole
 // Dual Pricing end
                                 );

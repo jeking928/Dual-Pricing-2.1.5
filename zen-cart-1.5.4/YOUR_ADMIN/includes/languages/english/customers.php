@@ -42,9 +42,9 @@ define('TEXT_INFO_GV_AMOUNT', 'GV Balance');
 define('ENTRY_NONE', 'None');
 
 define('TABLE_HEADING_COMPANY','Company');
-//Dual Pricing
+// Dual Pricing start
 define('TABLE_HEADING_WHOLESALE','Request Wholesale');
-
+// Dual Pricing end
 define('CUSTOMERS_AUTHORIZATION', 'Customers Authorization Status');
 define('CUSTOMERS_AUTHORIZATION_0', 'Approved');
 define('CUSTOMERS_AUTHORIZATION_1', 'Pending Approval - Must be Authorized to Browse');

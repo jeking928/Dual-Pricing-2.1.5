@@ -19,11 +19,11 @@ define('TEXT_PRODUCT_WEIGHT', 'Shipping Weight: ');
 define('TEXT_PRODUCT_QUANTITY', ' Units in Stock');
 define('TEXT_PRODUCT_MODEL', 'Model: ');
 
-// Dual Pricing
+// Dual Pricing start
 define('TEXT_PRODUCT_RETAIL_PRICE', 'Retail Price: ');
 define('TEXT_PRODUCT_WHOLESALE_PRICE', 'Wholesale Price: ');
 define('TEXT_PRODUCT_YOUR_PRICE', 'Your Price: ');
-//  Dual Pricing
+// Dual Pricing ends
 
 // previous next product
 define('PREV_NEXT_PRODUCT', 'Product ');
