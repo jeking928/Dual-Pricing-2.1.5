@@ -248,8 +248,9 @@ class order extends base {
 
     $this->content_type = $_SESSION['cart']->get_content_type();
 
-	//Dual Pricing
+// Dual Pricing start
     $customer_address_query = "select c.customers_firstname, c.customers_lastname, c.customers_telephone, c.customers_whole,
+// Dual Pricing end
                                     c.customers_email_address, ab.entry_company, ab.entry_street_address,
                                     ab.entry_suburb, ab.entry_postcode, ab.entry_city, ab.entry_zone_id,
                                     z.zone_name, co.countries_id, co.countries_name,
@@ -532,7 +533,7 @@ class order extends base {
       $products_tax = $this->products[$index]['tax'];
       $products_tax_description = $this->products[$index]['tax_description'];
 	  
-	  //Dual Pricing start - no taxes for wholesale customers
+// Dual Pricing start - no taxes for wholesale customers
 	  if ($customer_address->fields['customers_whole'] > 0)
       { $products_tax = 0;
         $this->products[$index]['tax'] = 0;
@@ -541,7 +542,7 @@ class order extends base {
       }
 	  if ($customer_address->fields['customers_whole'] == 0)
       {
-	  // Dual pricing end -  no taxes for wholesale customers
+// Dual pricing end -  no taxes for wholesale customers
 
       if (DISPLAY_PRICE_WITH_TAX == 'true') {
         // calculate the amount of tax "inc"luded in price (used if tax-in pricing is enabled)
@@ -564,9 +565,9 @@ class order extends base {
           $this->info['tax_groups'][$taxDescription] = $taxAdd;
         }
       }
-	  //Dual Pricing start -  no taxes for wholesale customers
+//Dual Pricing start -  no taxes for wholesale customers
 	  }
-	  // Dual pricing end -  no taxes for wholesale customers  
+// Dual pricing end -  no taxes for wholesale customers  
       /*********************************************
        * END: Calculate taxes for this product
        *********************************************/

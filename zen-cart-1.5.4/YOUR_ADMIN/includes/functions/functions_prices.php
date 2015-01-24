@@ -19,14 +19,14 @@
       return false;
     }
 
-//Dual Pricing start
+// Dual Pricing start
     if ($product->RecordCount() > 0) {
 //  	  $product_price = $product->fields['products_price'];
       $product_price = zen_get_products_base_price_w($product_id);
     } else {
       return false;
     }
-//Dual Pricing end
+// Dual Pricing end
 
     $specials = $db->Execute("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . (int)$product_id . "' and status='1'");
     if ($specials->RecordCount() > 0) {
@@ -148,7 +148,7 @@
       return $the_base_price;
   }
 
-//Dual Pricing start
+// Dual Pricing start
 ////
 // computes products_price + option groups lowest attributes price of each group when on
   function zen_get_products_base_price_w($products_id) {
@@ -179,7 +179,7 @@
       }
       return $the_base_price_w;
   }
-//Dual Pricing end
+// Dual Pricing end
 
 ////
 // Display Price Retail

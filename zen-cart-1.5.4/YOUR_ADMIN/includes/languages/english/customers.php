@@ -10,8 +10,9 @@
 define('HEADING_TITLE', 'Customers');
 
 define('TABLE_HEADING_ID', 'ID#');
-//Dual Pricing
+// Dual Pricing start
 define('ENTRY_WHOLESALE', 'Wholesale:');
+// Dual Pricing end
 define('TABLE_HEADING_FIRSTNAME', 'First Name');
 define('TABLE_HEADING_LASTNAME', 'Last Name');
 define('TABLE_HEADING_ACCOUNT_CREATED', 'Account Created');

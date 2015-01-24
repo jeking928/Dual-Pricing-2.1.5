@@ -40,11 +40,12 @@ if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
   }
   */
 
-//Dual Pricing
     // Check if email exists
     $check_customer_query = "SELECT customers_id, customers_firstname, customers_lastname, customers_password,
                                     customers_email_address, customers_default_address_id,
+// Dual Pricing start
                                     customers_authorization, customers_referral, customers_whole
+// Dual Pricing end
                            FROM " . TABLE_CUSTOMERS . "
                            WHERE customers_email_address = :emailAddress";
 
@@ -95,9 +96,9 @@ if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
         $_SESSION['customer_last_name'] = $check_customer->fields['customers_lastname'];
         $_SESSION['customer_country_id'] = $check_country->fields['entry_country_id'];
         $_SESSION['customer_zone_id'] = $check_country->fields['entry_zone_id'];
-//Dual Pricing
+// Dual Pricing start
 	$_SESSION['customer_whole'] = $check_customer->fields['customers_whole'];
-
+// Dual Pricing end
         // enforce db integrity: make sure related record exists
         $sql = "SELECT customers_info_date_of_last_logon FROM " . TABLE_CUSTOMERS_INFO . " WHERE customers_info_id = :customersID";
         $sql = $db->bindVars($sql, ':customersID',  $_SESSION['customer_id'], 'integer');

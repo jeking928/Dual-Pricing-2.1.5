@@ -35,8 +35,9 @@ define('TABLE_HEADING_PRODUCT', 'Product Name');
 define('TABLE_HEADING_OPT_NAME', 'Option Name');
 define('TABLE_HEADING_OPT_VALUE', 'Option Value');
 define('TABLE_HEADING_OPT_PRICE', 'Price');
-//Dual Pricing
+// Dual Pricing start
 define('TABLE_HEADING_OPT_PRICE_W', ' Wholesale Price');
+// Dual Pricing end
 define('TABLE_HEADING_OPT_PRICE_PREFIX', 'Prefix');
 define('TABLE_HEADING_ACTION', 'Action');
 define('TABLE_HEADING_DOWNLOAD', 'Downloadable products:');

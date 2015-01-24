@@ -5,7 +5,6 @@
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version GIT: $Id: Author: DrByte  Jun 30 2014 Modified in v1.5.4 $
-  * Dual Pricing 2.1.3 added
  */
 
   require('includes/application_top.php');
@@ -104,8 +103,9 @@
         $customers_email_format = zen_db_prepare_input($_POST['customers_email_format']);
         $customers_gender = zen_db_prepare_input($_POST['customers_gender']);
         $customers_dob = (empty($_POST['customers_dob']) ? zen_db_prepare_input('0001-01-01 00:00:00') : zen_db_prepare_input($_POST['customers_dob']));
-//Dual Pricing
+// Dual Pricing start
 	$customers_whole = zen_db_prepare_input($_POST['customers_whole']);
+// Dual Pricing end
         $customers_authorization = zen_db_prepare_input($_POST['customers_authorization']);
         $customers_referral= zen_db_prepare_input($_POST['customers_referral']);
 
@@ -251,7 +251,6 @@
       }
 
       if ($error == false) {
-//Dual Pricing
 
         $sql_data_array = array('customers_firstname' => $customers_firstname,
                                 'customers_lastname' => $customers_lastname,
@@ -263,7 +262,9 @@
                                 'customers_email_format' => $customers_email_format,
                                 'customers_authorization' => $customers_authorization,
                                 'customers_referral' => $customers_referral,
+// Dual Pricing start
 				'customers_whole' => $customers_whole
+// Dual Pricing end
                                 );
 
         if (ACCOUNT_GENDER == 'true') $sql_data_array['customers_gender'] = $customers_gender;
@@ -356,8 +357,9 @@
         zen_redirect(zen_href_link(FILENAME_CUSTOMERS, zen_get_all_get_params(array('cID', 'action')), 'NONSSL'));
         break;
       default:
-//Dual Pricing
+// Dual Pricing start
         $customers = $db->Execute("select c.customers_id, c.customers_gender, c.customers_firstname, c.customers_whole,
+// Dual Pricing end
                                           c.customers_lastname, c.customers_dob, c.customers_email_address,
                                           a.entry_company, a.entry_street_address, a.entry_suburb,
                                           a.entry_postcode, a.entry_city, a.entry_state, a.entry_zone_id,
@@ -634,7 +636,7 @@ function check_form() {
   }
 ?></td>
           </tr>
-	<!--Dual Pricing -->
+// Dual Pricing start
          <tr>
             <td class="main"><?php echo ENTRY_WHOLESALE_PRICING_LEVEL; ?></td>
             <td class="main">
@@ -642,7 +644,7 @@ function check_form() {
     echo zen_draw_input_field('customers_whole', $cInfo->customers_whole, zen_set_field_length(TABLE_CUSTOMERS, 'customers_whole', 50), false);
 ?><?php echo NOTES_WHOLESALE_PRICING_LEVEL; ?></td>
           </tr>	
-
+// Dual Pricing end
         </table></td>
       </tr>
 <?php
@@ -952,16 +954,17 @@ if ($processed == true) {
           <tr>
 <?php
 // Sort Listing
-//Dual Pricing
           switch ($_GET['list_order']) {
               case "id-asc":
               $disp_order = "ci.customers_info_date_account_created";
+// Dual Pricing start
               break;
               case "wholesale":
               $disp_order = "c.customers_whole";
               break;
               case "wholesale-desc":
               $disp_order = "c.customers_whole DESC";
+// Dual Pricing end
               break;
               case "firstname":
               $disp_order = "c.customers_firstname";
@@ -1030,12 +1033,13 @@ if ($processed == true) {
                   <a href="<?php echo zen_href_link(basename($PHP_SELF) . '?list_order=company-desc', '', 'NONSSL'); ?>"><?php echo ($_GET['list_order']=='company-desc' ? '<span class="SortOrderHeader">Desc</span>' : '<span class="SortOrderHeaderLink">Desc</b>'); ?></a>
                 </td>
                 <td class="dataTableHeadingContent" align="left" valign="top">
-	<!-- Dual Pricing -->
+// Dual Pricing start
                   <?php echo (($_GET['list_order']=='wholesale' or $_GET['list_order']=='wholesale-desc') ? '<span class="SortOrderHeader">' . TABLE_HEADING_WHOLESALE . '</span>' : TABLE_HEADING_WHOLESALE); ?><br>
                   <a href="<?php echo zen_href_link(basename($PHP_SELF) . '?list_order=wholesale', '', 'NONSSL'); ?>"><?php echo ($_GET['list_order']=='wholesale' ? '<span class="SortOrderHeader">Asc</span>' : '<span class="SortOrderHeaderLink">Asc</b>'); ?></a>&nbsp;
                   <a href="<?php echo zen_href_link(basename($PHP_SELF) . '?list_order=wholesale-desc', '', 'NONSSL'); ?>"><?php echo ($_GET['list_order']=='wholesale-desc' ? '<span class="SortOrderHeader">Desc</span>' : '<span class="SortOrderHeaderLink">Desc</b>'); ?></a>
                 </td>
                 <td class="dataTableHeadingContent" align="left" valign="top">
+// Dual Pricing end
                   <?php echo (($_GET['list_order']=='id-asc' or $_GET['list_order']=='id-desc') ? '<span class="SortOrderHeader">' . TABLE_HEADING_ACCOUNT_CREATED . '</span>' : TABLE_HEADING_ACCOUNT_CREATED); ?><br>
                   <a href="<?php echo zen_href_link(basename($PHP_SELF) . '?list_order=id-asc', '', 'NONSSL'); ?>"><?php echo ($_GET['list_order']=='id-asc' ? '<span class="SortOrderHeader">Asc</span>' : '<span class="SortOrderHeaderLink">Asc</b>'); ?></a>&nbsp;
                   <a href="<?php echo zen_href_link(basename($PHP_SELF) . '?list_order=id-desc', '', 'NONSSL'); ?>"><?php echo ($_GET['list_order']=='id-desc' ? '<span class="SortOrderHeader">Desc</span>' : '<span class="SortOrderHeaderLink">Desc</b>'); ?></a>
@@ -1076,9 +1080,11 @@ if ($processed == true) {
       $search = "where c.customers_lastname like '%" . $keywords . "%' or c.customers_firstname like '%" . $keywords . "%' or c.customers_email_address like '%" . $keywords . "%' or c.customers_telephone rlike ':keywords:' or a.entry_company rlike ':keywords:' or a.entry_street_address rlike ':keywords:' or a.entry_city rlike ':keywords:' or a.entry_postcode rlike ':keywords:'";
       $search = $db->bindVars($search, ':keywords:', $keywords, 'regexp');
     }
-//Dual Pricing
+
     $new_fields=', c.customers_telephone, a.entry_company, a.entry_street_address, a.entry_city, a.entry_postcode, c.customers_authorization, c.customers_referral';
+// Dual Pricing start
     $customers_query_raw = "select c.customers_id, c.customers_lastname, c.customers_firstname, c.customers_email_address, c.customers_group_pricing, a.entry_country_id, a.entry_company, ci.customers_info_date_of_last_logon, ci.customers_info_date_account_created, customers_whole " . $new_fields . ",
+// Dual Pricing end
     cgc.amount
     from " . TABLE_CUSTOMERS . " c
     left join " . TABLE_CUSTOMERS_INFO . " ci on c.customers_id= ci.customers_info_id
@@ -1161,8 +1167,9 @@ if (($_GET['page'] == '' or $_GET['page'] == '1') and $_GET['cID'] != '') {
                 <td class="dataTableContent"><?php echo $customers->fields['customers_lastname']; ?></td>
                 <td class="dataTableContent"><?php echo $customers->fields['customers_firstname']; ?></td>
                 <td class="dataTableContent"><?php echo $customers->fields['entry_company']; ?></td>
-	<!-- Dual Pricing -->
+// Dual Pricing start
 		<td class="dataTableContent"><?php echo $customers->fields['customers_whole']; ?></td>
+ // Dual Pricing end
                 <td class="dataTableContent"><?php echo zen_date_short($info->fields['date_account_created']); ?></td>
                 <td class="dataTableContent"><?php echo zen_date_short($customers->fields['customers_info_date_of_last_logon']); ?></td>
                 <td class="dataTableContent"><?php echo $group_name_entry; ?></td>

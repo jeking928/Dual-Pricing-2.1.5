@@ -24,20 +24,20 @@
 
     $specials = $db->Execute("select specials_new_products_price from " . TABLE_SPECIALS . " where products_id = '" . (int)$product_id . "' and status='1'");
 	
-//Dual Pricing start - hide specials
+// Dual Pricing start - hide specials
 if ($_SESSION['customer_whole'] && $_SESSION['customer_whole'] != '0' ) {
 $special_price = false;
 } else {
-//Dual Pricing end - hide specials
+// Dual Pricing end - hide specials
     if ($specials->RecordCount() > 0) {
 //      if ($product->fields['products_priced_by_attribute'] == 1) {
         $special_price = $specials->fields['specials_new_products_price'];
     } else {
       $special_price = false;
     }
-//Dual Pricing start - hide specials
+// Dual Pricing start - hide specials
 }
-//Dual Pricing end - hide specials
+// Dual Pricing end - hide specials
 
     if(substr($product->fields['products_model'], 0, 4) == 'GIFT') {    //Never apply a salededuction to Ian Wilson's Giftvouchers
       if (zen_not_null($special_price)) {
@@ -47,11 +47,11 @@ $special_price = false;
       }
     }
 
-//Dual Pricing start - hide specials
+// Dual Pricing start - hide specials
 if ($_SESSION['customer_whole'] && $_SESSION['customer_whole'] != '0' ) {
 $tmp_special_price = $product_price;
 } else {
-//Dual Pricing end	 - hide specials
+// Dual Pricing end - hide specials
 
 // return special price only
     if ($specials_price_only==true) {
@@ -75,9 +75,9 @@ $tmp_special_price = $product_price;
       if ($sale->RecordCount() < 1) {
          return $special_price;
       }
-//Dual Pricing start - hide specials
+// Dual Pricing start - hide specials
 }
-//Dual Pricing end	- hide specials	  
+// Dual Pricing end - hide specials	  
 
       if (!$special_price) {
         $tmp_special_price = $product_price;
@@ -132,13 +132,13 @@ $tmp_special_price = $product_price;
 
 ////
 // computes products_price + option groups lowest attributes price of each group when on
-//Dual Pricing
   function zen_get_products_base_price($products_id) {
     global $db;
+// Dual Pricing stat
       $product_check = $db->Execute("select products_price, products_price_w, products_priced_by_attribute from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
-
+// Dual Pricing end
 // is there a products_price to add to attributes
-//Dual Pricing start
+// Dual Pricing start
 if ($_SESSION['customer_whole']) {
 		if ($_SESSION['customer_whole'] != '0') {
 			$i = (int)$_SESSION['customer_whole'];
@@ -164,7 +164,7 @@ if ($_SESSION['customer_whole']) {
       // do not select display only attributes and attributes_price_base_included is true
       $product_att_query = $db->Execute("select options_id, price_prefix, options_values_price, options_values_price_w, attributes_display_only, attributes_price_base_included, round(concat(price_prefix, options_values_price), 5) as value from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . (int)$products_id . "' and attributes_display_only != '1' and attributes_price_base_included='1'". " order by options_id, value");
 
-//Dual Pricing end
+// Dual Pricing end
       $the_options_id= 'x';
       $the_base_price= 0;
 // add attributes price to price
@@ -172,7 +172,7 @@ if ($_SESSION['customer_whole']) {
         while (!$product_att_query->EOF) {
           if ( $the_options_id != $product_att_query->fields['options_id']) {
             $the_options_id = $product_att_query->fields['options_id'];
-//Dual Pricing start
+// Dual Pricing start
             if ($_SESSION['customer_whole']) {
 		if ($_SESSION['customer_whole'] != '0') {
 			$i = (int)$_SESSION['customer_whole'];
@@ -196,7 +196,7 @@ if ($_SESSION['customer_whole']) {
   $the_base_price += (($product_att_query->fields['price_prefix'] == '-') ? -1 : 1) * $product_att_query->fields['options_values_price'];
 }
           }
-//Dual Pricing end
+// Dual Pricing end
           $product_att_query->MoveNext();
         }
 
@@ -206,7 +206,7 @@ if ($_SESSION['customer_whole']) {
       }
       return $the_base_price;
   }
-//Dual Pricing start
+// Dual Pricing start
 //****************************************************************
 //*****Generate Net Retail Price for Displaying with Trade Price
 //****************************************************************
@@ -240,7 +240,7 @@ if ($_SESSION['customer_whole']) {
       }
       return $the_retail_net_price;
   }
-//Dual Pricing end
+// Dual Pricing end
 
 ////
 // Display Price Retail
@@ -384,7 +384,7 @@ if ($_SESSION['customer_whole']) {
 
     return $final_display_price . $free_tag . $call_tag;
   }
-//Dual Pricing start
+// Dual Pricing start
 // Display Price Retail
 // Specials and Tax Included
  function zen_get_products_display_retail_net_price($products_id) {
@@ -518,7 +518,7 @@ if ($_SESSION['customer_whole']) {
 
   return $final_display_price . $free_tag . $call_tag;
  }
-//Dual Pricing end
+// Dual Pricing end
 
 ////
 // Is the product free?
@@ -1309,7 +1309,7 @@ If a special exist * 10
       // use existing select
     }
 
-//Dual Pricing start
+// Dual Pricing start
 if ($_SESSION['customer_whole']) {
 		if ($_SESSION['customer_whole'] != '0') {
 			$i = (int)$_SESSION['customer_whole'];
@@ -1332,14 +1332,15 @@ if ($_SESSION['customer_whole']) {
 } else {
 $options_values_price = $pre_selected->fields['options_values_price'];
 }
-//Dual Pricing end		
+// Dual Pricing end		
 		
     if ($pre_selected->fields["price_prefix"] == '-') {
-	//Dual Pricing
+// Dual Pricing start
       $attributes_price_final -= $options_values_price;
     } else {
-	//Dual Pricing
+
       $attributes_price_final += $options_values_price;
+// Dual Pricing end
     }
 
     // qty discounts
@@ -1499,6 +1500,7 @@ $options_values_price = $pre_selected->fields['options_values_price'];
           if ($products_query->fields['products_discount_type_from'] == '0') {
             // priced by attributes
             if ($check_amount != 0) {
+// Dual Pricing start
                 if ($_SESSION['customer_whole'] && $_SESSION['customer_whole'] != '0' ) {
                     $discounted_price = $check_amount - ($check_amount * ($products_discounts_query->fields['discount_price_w']/100));
                 } else {
@@ -1572,6 +1574,7 @@ $options_values_price = $pre_selected->fields['options_values_price'];
                 } else {
                     $discounted_price = $display_specials_price - $products_discounts_query->fields['discount_price'];
                 }
+// Dual Pricing end
             }
           }
           break;

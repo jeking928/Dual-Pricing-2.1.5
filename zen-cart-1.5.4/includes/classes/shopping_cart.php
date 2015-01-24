@@ -650,9 +650,10 @@ class shoppingCart extends base {
       $freeShippingTotal = $productTotal = $totalOnetimeCharge = $totalOnetimeChargeNoDiscount = 0;
       $qty = $this->contents[$products_id]['qty'];
 
-	  //Dual Pricing
       // products price
+// Dual Pricing start
       $product_query = "select products_id, products_price, products_price_w, products_tax_class_id, products_weight,
+// Dual Pricing end
                           products_priced_by_attribute, product_is_always_free_shipping, products_discount_type, products_discount_type_from,
                           products_virtual, products_model
                           from " . TABLE_PRODUCTS . "
@@ -661,7 +662,7 @@ class shoppingCart extends base {
       if ($product = $db->Execute($product_query)) {
         $prid = $product->fields['products_id'];
         $products_tax = zen_get_tax_rate($product->fields['products_tax_class_id']);
-//Dual Pricing start
+// Dual Pricing start
 if ($_SESSION['customer_id']) {
     $customers_id = $_SESSION['customer_id'];
 	$customer_check = $db->Execute("select * from " . TABLE_CUSTOMERS . " where customers_id = '$customers_id'");
@@ -686,7 +687,7 @@ if ($_SESSION['customer_id']) {
 } else {
 	$products_price = $product->fields['products_price'];
 }
-//Dual Pricing end
+// Dual Pricing end
 
         // adjusted count for free shipping
         if ($product->fields['product_is_always_free_shipping'] != 1 and $product->fields['products_virtual'] != 1) {
@@ -761,7 +762,7 @@ if ($_SESSION['customer_id']) {
                                       and options_values_id = '" . (int)$value . "'";
 
           $attribute_price = $db->Execute($attribute_price_query);
-//Dual Pricing start
+// Dual Pricing start
 if ($_SESSION['customer_id']) {
     $customers_id = $_SESSION['customer_id'];
 	$customer_check = $db->Execute("select * from " . TABLE_CUSTOMERS . " where customers_id = '$customers_id'");
@@ -776,7 +777,7 @@ if ($_SESSION['customer_id']) {
 } else {
 	$options_value_price = $attribute_price->fields['options_values_price'];
 }
-//Dual Pricing end
+// Dual Pricing end
 
           $new_attributes_price = 0;
         // calculate Product Price without Specials, Sales or Discounts
@@ -816,7 +817,7 @@ if ($_SESSION['customer_id']) {
               if ($attribute_price->fields['attributes_discounted'] == '1') {
                 // calculate proper discount for attributes
                 $new_attributes_price = zen_get_discount_calc($product->fields['products_id'], $attribute_price->fields['products_attributes_id'], $attribute_price->fields['options_values_price'], $qty);
-//Dual Pricing start
+// Dual Pricing start
                 //$productTotal += $new_attributes_price;
                 if ($_SESSION['customer_id']) {               
               if ($customer_check->fields['customers_whole'] != "0") { 
@@ -824,7 +825,7 @@ if ($_SESSION['customer_id']) {
               } 
               }
                 $this->total += $qty * zen_add_tax( ($new_attributes_price), $products_tax);
-//Dual Pricing end
+// Dual Pricing end
               } else {
                 $productTotal += $attribute_price->fields['options_values_price'];
               }
@@ -1026,7 +1027,7 @@ if ($_SESSION['customer_id']) {
                                     and options_values_id = '" . (int)$value . "'";
 
         $attribute_price = $db->Execute($attribute_price_query);
-//Dual Pricing start
+// Dual Pricing start
 if ($_SESSION['customer_id']) {
     $customers_id = $_SESSION['customer_id'];
 	$customer_check = $db->Execute("select * from " . TABLE_CUSTOMERS . " where customers_id = '$customers_id'");
@@ -1041,7 +1042,7 @@ if ($_SESSION['customer_id']) {
 } else {
 	$options_value_price = $attribute_price->fields['options_values_price'];
 }
-//Dual Pricing end
+// Dual Pricing end
         $new_attributes_price = 0;
         $discount_type_id = '';
         $sale_maker_discount = '';
@@ -1067,13 +1068,13 @@ if ($_SESSION['customer_id']) {
               $discount_type_id = '';
               $sale_maker_discount = '';
               $new_attributes_price = zen_get_discount_calc($products_id, $attribute_price->fields['products_attributes_id'], $attribute_price->fields['options_values_price'], $qty);
-//Dual Pricing start
+// Dual Pricing start
 				 if ($_SESSION['customer_id']) { 
               if ($customer_check->fields['customers_whole'] != "0") { 
               $new_attributes_price = zen_get_discount_calc($products_id, $attribute_price->fields['products_attributes_id'], $attribute_price->fields['options_values_price_w'], $qty); 
               } 
               }
-//Dual Pricing end
+// Dual Pricing end
               $attributes_price += ($new_attributes_price);
             } else {
               $attributes_price += $attribute_price->fields['options_values_price'];
@@ -1151,7 +1152,7 @@ if ($_SESSION['customer_id']) {
                                     and options_values_id = '" . (int)$value . "'";
 
         $attribute_price = $db->Execute($attribute_price_query);
-////Dual Pricing start
+// Dual Pricing start
 if ($_SESSION['customer_id']) {
     $customers_id = $_SESSION['customer_id'];
 	$customer_check = $db->Execute("select * from " . TABLE_CUSTOMERS . " where customers_id = '$customers_id'");
@@ -1166,7 +1167,7 @@ if ($_SESSION['customer_id']) {
 } else {
 	$options_value_price = $attribute_price->fields['options_values_price'];
 }
-//Dual Pricing end
+// Dual Pricing end
         $new_attributes_price = 0;
         $discount_type_id = '';
         $sale_maker_discount = '';
@@ -1273,10 +1274,11 @@ if ($_SESSION['customer_id']) {
 
     $products_array = array();
     reset($this->contents);
-	//Dual Pricing
     while (list($products_id, ) = each($this->contents)) {
       $products_query = "select p.products_id, p.master_categories_id, p.products_status, pd.products_name, p.products_model, p.products_image,
+// Dual Pricing start
                                   p.products_price, p.products_price_w, p.products_weight, p.products_tax_class_id,
+// Dual Pricing end
                                   p.products_quantity_order_min, p.products_quantity_order_units, p.products_quantity_order_max,
                                   p.product_is_free, p.products_priced_by_attribute,
                                   p.products_discount_type, p.products_discount_type_from, p.products_virtual, p.product_is_always_free_shipping
@@ -1288,7 +1290,7 @@ if ($_SESSION['customer_id']) {
       if ($products = $db->Execute($products_query)) {
 
         $prid = $products->fields['products_id'];
-//Dual Pricing start
+// Dual Pricing start
 if ($_SESSION['customer_id']) {
     $customers_id = $_SESSION['customer_id'];
 	$customer_check = $db->Execute("select * from " . TABLE_CUSTOMERS . " where customers_id = '$customers_id'");
@@ -1313,7 +1315,7 @@ if ($_SESSION['customer_id']) {
 } else {
 	$products_price = $products->fields['products_price'];
 };
-//Dual Pricing end
+// Dual Pricing end
         //fix here
         /*
         $special_price = zen_get_products_special_price($prid);

@@ -6,7 +6,7 @@
  * @copyright Copyright 2003-2013 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version GIT: $Id: Author: ajeh  Wed Jun 26 12:17:51 2013 -0400 Modified in v1.5.2 $\
+ * @version GIT: $Id: Author: ajeh  Wed Jun 26 12:17:51 2013 -0400 Modified in v1.5.2 $
  */
 if (!defined('IS_ADMIN_FLAG')) {
   die('Illegal Access');
@@ -80,7 +80,6 @@ switch (true) {
   $show_qty = $products_quantity_order_min . '-' . number_format($products_discounts_query->fields['discount_qty']-1);
   break;
 }
-// Dual Pricing
 //$discounted_price = $products_discounts_query->fields['discount_price'];
 // $currencies->display_price($discounted_price, zen_get_tax_rate(1), 1)
 
@@ -99,7 +98,7 @@ while (!$products_discounts_query->EOF) {
     // percentage discount
     case '1':
       if ($products_discount_type_from == '0') {
-//Dual Pricing start
+// Dual Pricing start
 	if ($_SESSION['customer_whole'] && $_SESSION['customer_whole'] != '0' ) {
 	  $quantityDiscounts[$columnCount]['discounted_price'] = $display_price - ($display_price * ($products_discounts_query->fields['discount_price_w']/100));
 	} else {
@@ -151,7 +150,7 @@ while (!$products_discounts_query->EOF) {
         } else {
           $quantityDiscounts[$columnCount]['discounted_price'] = $display_specials_price - $products_discounts_query->fields['discount_price_w'];
         }
-//Dual Pricing end
+// Dual Pricing end
       }
     break;
   }
