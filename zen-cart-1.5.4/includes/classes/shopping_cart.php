@@ -829,10 +829,8 @@ if ($_SESSION['customer_id']) {
                 //$productTotal += $new_attributes_price;
                 if ($_SESSION['customer_id']) {               
 					if ($customer_check->fields['customers_whole'] != "0") { 
-						
 						// Jing Fix the bug
 						//$new_attributes_price = zen_get_discount_calc($product->fields['products_id'], $attribute_price->fields['products_attributes_id'], $attribute_price->fields['options_values_price_w'], $qty); 
-						
 						$option_price_array = $attribute_price->fields['options_values_price_w'];
 						$optionprice = explode(",",$option_price_array);
 						$options_values_price = (float)$optionprice[$i];
@@ -840,7 +838,6 @@ if ($_SESSION['customer_id']) {
 						if ($options_values_price==''){
 							$options_values_price = (float)$optionprice[0];
 						}
-						
 						$new_attributes_price = zen_get_discount_calc($product->fields['products_id'], $attribute_price->fields['products_attributes_id'], $options_values_price, $qty); 
 					}
               }
