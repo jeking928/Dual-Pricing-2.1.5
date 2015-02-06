@@ -35,9 +35,9 @@ if (!defined('IS_ADMIN_FLAG')) {
           } elseif ($_POST['copy_as'] == 'duplicate') {
             $old_products_id = (int)$products_id;
             $product = $db->Execute("select products_type, products_quantity, products_model, products_image,
-/* Dual Pricing start */
+// Dual Pricing start
                                             products_price, products_price_w, products_virtual, products_date_available, products_weight,
-/* Dual Pricing end */
+// Dual Pricing end
                                             products_tax_class_id, manufacturers_id,
                                             products_quantity_order_min, products_quantity_order_units, products_priced_by_attribute,
                                             product_is_free, product_is_call, products_quantity_mixed,
@@ -59,9 +59,9 @@ if (!defined('IS_ADMIN_FLAG')) {
 
             $db->Execute("insert into " . TABLE_PRODUCTS . "
                                       (products_type, products_quantity, products_model, products_image,
-/* Dual Pricing start */
+// Dual Pricing start
                                        products_price, products_price_w, products_virtual, products_date_added, products_date_available,
-/* Dual Pricing end */
+// Dual Pricing end
                                        products_weight, products_status, products_tax_class_id,
                                        manufacturers_id,
                                        products_quantity_order_min, products_quantity_order_units, products_priced_by_attribute,
@@ -74,9 +74,9 @@ if (!defined('IS_ADMIN_FLAG')) {
                                   '" . zen_db_input($product->fields['products_model']) . "',
                                   '" . zen_db_input($product->fields['products_image']) . "',
                                   '" . $products_price . "',
-/* Dual Pricing start */
+// Dual Pricing start
 				  '" . $products_price_w . "',
-/* Dual Pricing end */
+// Dual Pricing end
                                   '" . zen_db_input($product->fields['products_virtual']) . "',
                                   now(),
                                   '" . (zen_not_null(zen_db_input($product->fields['products_date_available'])) ? zen_db_input($product->fields['products_date_available']) : '0001-01-01 00:00:00') . "',
