@@ -17,9 +17,9 @@ if (!defined('IS_ADMIN_FLAG')) {
                        'products_model' => '',
                        'products_image' => '',
                        'products_price' => '',
-// Dual Pricing start
+/* Dual Pricing start */
                        'products_price_w' => '',
-// Dual Pricing end
+/* Dual Pricing end */
                        'products_virtual' => DEFAULT_PRODUCT_PRODUCTS_VIRTUAL,
                        'products_weight' => '',
                        'products_date_added' => '',
@@ -49,9 +49,9 @@ if (!defined('IS_ADMIN_FLAG')) {
     if (isset($_GET['pID']) && empty($_POST)) {
       $product = $db->Execute("select pd.products_name, pd.products_description, pd.products_url,
                                       p.products_id, p.products_quantity, p.products_model,
-// Dual Pricing start
+/* Dual Pricing start */
                                       p.products_image, p.products_price, p.products_price_w, p.products_virtual, p.products_weight,
-// Dual Pricing end
+/* Dual Pricing end */
                                       p.products_date_added, p.products_last_modified,
                                       date_format(p.products_date_available, '%Y-%m-%d') as
                                       products_date_available, p.products_status, p.products_tax_class_id,
@@ -340,7 +340,7 @@ echo zen_draw_hidden_field('products_price_sorter', $pInfo->products_price_sorte
             <td class="main"><?php echo TEXT_PRODUCTS_PRICE_GROSS; ?></td>
             <td class="main"><?php echo zen_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . zen_draw_input_field('products_price_gross', $pInfo->products_price, 'OnKeyUp="updateNet()"'); ?></td>
           </tr>
-// Dual Pricing start
+<!--- Dual Pricing start --->
 	  <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_WHOLESALE_PRICE_NET; ?></td>
             <td class="main"><?php echo zen_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . zen_draw_input_field('products_price_w', $pInfo->products_price_w); ?><?php echo TEXT_WHOLESALE_PRICE_COMMENT; ?></td>
@@ -349,7 +349,7 @@ echo zen_draw_hidden_field('products_price_sorter', $pInfo->products_price_sorte
 			 */
 			?>
           </tr>
-// Dual Pricing end
+<!--- Dual Pricing end --->
           <tr>
             <td colspan="2"><?php echo zen_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
