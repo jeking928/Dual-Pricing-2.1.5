@@ -322,8 +322,8 @@
                                   '" . (int)$options_id . "',
                                   '" . (int)$values_id . "',
                                   '" . (float)zen_db_input($value_price) . "',
-                                  '" . (float)zen_db_input($value_price_w) . "',
-/* dual pricing end */
+				  '" . (float)zen_db_input($value_price_w) . "',
+
                                   '" . zen_db_input($price_prefix) . "',
                                   '" . (int)zen_db_input($products_options_sort_order) . "',
                                   '" . (int)zen_db_input($product_attribute_is_free) . "',
@@ -467,9 +467,9 @@ if ($_POST['image_delete'] == 1) {
                               options_id = '" . (int)$options_id . "',
                               options_values_id = '" . (int)$values_id . "',
                               options_values_price = '" . zen_db_input($value_price) . "',
-/* dual pricing start */
+
 			      options_values_price_w = '" . zen_db_input($value_price_w) . "',
-/* dual pricing end */
+
                               price_prefix = '" . zen_db_input($price_prefix) . "',
                               products_options_sort_order = '" . zen_db_input($products_options_sort_order) . "',
                               product_attribute_is_free = '" . zen_db_input($product_attribute_is_free) . "',
