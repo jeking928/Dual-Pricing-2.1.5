@@ -34,7 +34,7 @@
                             'products_model' => zen_db_prepare_input($_POST['products_model']),
                             'products_price' => $products_price,
 			    'products_price_w' => $products_price_w,
-// Dual Pricing end
+/* Dual Pricing end */
                             'products_date_available' => $products_date_available,
                             'products_weight' => $products_weight,
                             'products_status' => zen_db_prepare_input((int)$_POST['products_status']),

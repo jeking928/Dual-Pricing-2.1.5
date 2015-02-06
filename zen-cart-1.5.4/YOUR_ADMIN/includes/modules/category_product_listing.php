@@ -70,9 +70,9 @@ if (!isset($_SESSION['display_categories_dropdown'])) {
                 <td class="dataTableHeadingContent" width="20" align="right"><?php echo TABLE_HEADING_ID; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CATEGORIES_PRODUCTS; ?></td>
                 <td class="dataTableHeadingContent" align="left"><?php echo TABLE_HEADING_MODEL; ?></td>
-// Dual Pricing start
+<!--- Dual Pricing start --->
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_WHOLESALE; ?></td>
-// Dual Pricing end
+<!--- Dual Pricing end --->
                 <td class="dataTableHeadingContent" align="right">&nbsp;</td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_QUANTITY; ?>&nbsp;&nbsp;&nbsp;</td>
                 <td class="dataTableHeadingContent" width="50" align="center"><?php echo TABLE_HEADING_STATUS; ?></td>
@@ -245,9 +245,9 @@ if (!isset($_SESSION['display_categories_dropdown'])) {
                                 $order_by);
 */
       $products_query_raw = ("select p.products_type, p.products_id, pd.products_name, p.products_quantity,
-// Dual Pricing start
+/* Dual Pricing start */
                                        p.products_image, p.products_price, p.products_price_w, p.products_date_added,
-// Dual Pricing end
+/* Dual Pricing end */
                                        p.products_last_modified, p.products_date_available,
                                        p.products_status, p2c.categories_id,
                                        p.products_model,
@@ -270,9 +270,9 @@ if (!isset($_SESSION['display_categories_dropdown'])) {
 
     } else {
       $products_query_raw = ("select p.products_type, p.products_id, pd.products_name, p.products_quantity,
-// Dual Pricing start
+/* Dual Pricing start */
                                        p.products_image, p.products_price, p.products_price_w, p.products_date_added,
-// Dual Pricing end
+/* Dual Pricing end */
                                        p.products_last_modified, p.products_date_available,
                                        p.products_status, p.products_model,
                                        p.products_quantity_order_min, p.products_quantity_order_units, p.products_priced_by_attribute,
@@ -340,7 +340,7 @@ if (($_GET['page'] == '1' or $_GET['page'] == '') and isset($_GET['pID']) && $_G
                 <td class="dataTableContent" width="20" align="right"><?php echo $products->fields['products_id']; ?></td>
                 <td class="dataTableContent"><?php echo '<a href="' . zen_href_link($type_handler, 'cPath=' . $cPath . '&pID=' . $products->fields['products_id'] . '&action=new_product_preview&read=only' . '&product_type=' . $products->fields['products_type'] . (isset($_GET['page']) ? '&page=' . $_GET['page'] : '')) . '">' . zen_image(DIR_WS_ICONS . 'preview.gif', ICON_PREVIEW) . '</a>&nbsp;' . $products->fields['products_name']; ?></td>
                 <td class="dataTableContent"><?php echo $products->fields['products_model']; ?></td>
-// Dual Pricing start
+<!--- Dual Pricing start --->
 <?php
 //***************************************************************
 //***** DISPLAY WHOLESALE PRICE
@@ -358,7 +358,7 @@ echo $products->fields['products_price_w'];}
 //*************************************************************** 
 ?>
 </td>
-// Dual Pricing start              
+<!--- Dual Pricing start -->             
                 <td class="dataTableContent" align="right"><?php echo $products->fields['products_quantity']; ?></td>
                 <td class="dataTableContent" width="50" align="left">
 <?php
