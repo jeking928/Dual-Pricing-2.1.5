@@ -653,7 +653,7 @@ class shoppingCart extends base {
       // products price
 // Dual Pricing start
       $product_query = "select products_id, products_price, products_price_w, products_tax_class_id, products_weight,
-// Dual Pricing end
+/* Dual Pricing end */
                           products_priced_by_attribute, product_is_always_free_shipping, products_discount_type, products_discount_type_from,
                           products_virtual, products_model
                           from " . TABLE_PRODUCTS . "
@@ -1309,9 +1309,9 @@ if ($_SESSION['customer_id']) {
     reset($this->contents);
     while (list($products_id, ) = each($this->contents)) {
       $products_query = "select p.products_id, p.master_categories_id, p.products_status, pd.products_name, p.products_model, p.products_image,
-// Dual Pricing start
+/* Dual Pricing start */
                                   p.products_price, p.products_price_w, p.products_weight, p.products_tax_class_id,
-// Dual Pricing end
+/* Dual Pricing end */
                                   p.products_quantity_order_min, p.products_quantity_order_units, p.products_quantity_order_max,
                                   p.product_is_free, p.products_priced_by_attribute,
                                   p.products_discount_type, p.products_discount_type_from, p.products_virtual, p.product_is_always_free_shipping
