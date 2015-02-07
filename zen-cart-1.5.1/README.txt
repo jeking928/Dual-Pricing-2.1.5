@@ -41,7 +41,8 @@ How do I use it?
 
 1. To set 4 levels of wholesale pricing, edit the product and change the wholesale price to be a dash separated list, eg. 50.00-30.00-0.00-25.00
 
-2. Attributes can be set in the same way, but you need to enter the prices in the "Trade" field and use comma separation, eg. 50.00,30.00,0.00,25,00
+2. Attributes can be set in the same way, but you need to enter the prices in the "Wholesale Price" field and use comma separation, eg. 50.00,30.00,0.00,25,00
+[Known bug, attribute level pricing does not work]
 
 3. Pick a customer and click "edit". You will see a new text box under the email address box. The number should be 0, If you change it to a number above 0 then the customer gets wholesale pricing at that level. 
 
