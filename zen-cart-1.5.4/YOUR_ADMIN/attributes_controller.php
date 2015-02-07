@@ -316,15 +316,14 @@
               $attributes_image_name = $current_image_name;
             }
 // Dual Pricing start
-
             $db->Execute("insert into " . TABLE_PRODUCTS_ATTRIBUTES . " (products_attributes_id, products_id, options_id, options_values_id, options_values_price, options_values_price_w, price_prefix, products_options_sort_order, product_attribute_is_free, products_attributes_weight, products_attributes_weight_prefix, attributes_display_only, attributes_default, attributes_discounted, attributes_image, attributes_price_base_included, attributes_price_onetime, attributes_price_factor, attributes_price_factor_offset, attributes_price_factor_onetime, attributes_price_factor_onetime_offset, attributes_qty_prices, attributes_qty_prices_onetime, attributes_price_words, attributes_price_words_free, attributes_price_letters, attributes_price_letters_free, attributes_required)
                           values (0,
                                   '" . (int)$products_id . "',
                                   '" . (int)$options_id . "',
                                   '" . (int)$values_id . "',
                                   '" . (float)zen_db_input($value_price) . "',
-				  '" . (float)zen_db_input($value_price_w) . "',
-// Dual Pricing end
+                                  '" . (float)zen_db_input($value_price_w) . "',
+/* dual pricing end */
                                   '" . zen_db_input($price_prefix) . "',
                                   '" . (int)zen_db_input($products_options_sort_order) . "',
                                   '" . (int)zen_db_input($product_attribute_is_free) . "',
@@ -468,9 +467,9 @@ if ($_POST['image_delete'] == 1) {
                               options_id = '" . (int)$options_id . "',
                               options_values_id = '" . (int)$values_id . "',
                               options_values_price = '" . zen_db_input($value_price) . "',
-// Dual Pricing start
+/* dual pricing start */
 			      options_values_price_w = '" . zen_db_input($value_price_w) . "',
-// Dual Pricing end
+/* dual pricing end */
                               price_prefix = '" . zen_db_input($price_prefix) . "',
                               products_options_sort_order = '" . zen_db_input($products_options_sort_order) . "',
                               product_attribute_is_free = '" . zen_db_input($product_attribute_is_free) . "',
@@ -1183,7 +1182,7 @@ if ($action == '') {
             </td>
           </tr>
           <tr>
-// Dual Pricing start
+<!--- Dual Pricing start --->
             <td colspan="11"><?php echo zen_black_line(); ?></td>
           </tr>
           <tr class="dataTableHeadingRow">
@@ -1235,7 +1234,7 @@ if ($action == '') {
           <tr class="attributeBoxContent">
             <td colspan="11" class="dataTableHeadingContent">&nbsp;</td>
           </tr>
-// Dual Pricing end
+<!--- Dual Pricing end --->
 <?php } ?>
 <?php
   $current_options_name = '';
@@ -1272,7 +1271,7 @@ if ($action == '') {
     if (($action == 'update_attribute') && ($_GET['attribute_id'] == $attributes_values->fields['products_attributes_id'])) {
 ?>
           <tr>
-// Dual Pricing start
+<!--- Dual Pricing start --->
             <td colspan="11"><?php echo zen_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
           </tr>
           <tr>
@@ -1280,7 +1279,7 @@ if ($action == '') {
           </tr>
 
 <tr><td colspan="11" class="attributeBoxContent"><table border="0" width="100%">
-// Dual Pricing end
+<!--- Dual Pricing end --->
 <tr><td class="pageHeading"><?php echo PRODUCTS_ATTRIBUTES_EDITING; ?>
 
 <?php // fix here edit ?>
@@ -1402,9 +1401,9 @@ if ($action == '') {
         <table border="1" cellpadding="4" cellspacing="2" align="left">
           <tr>
             <td align="center" class="smallText">&nbsp;<?php echo TABLE_HEADING_OPT_PRICE; ?><br /><input type="text" name="price_prefix" value="<?php echo $attributes_values->fields['price_prefix']; ?>" size="2">&nbsp;<input type="text" name="value_price" value="<?php echo $attributes_values->fields['options_values_price']; ?>" size="6">&nbsp;</td>
-// Dual Pricing start
+<!--- Dual Pricing start --->
 	    <td align="center" class="smallText">&nbsp;<?php echo TABLE_HEADING_OPT_PRICE_W; ?><br /><input type="text" name="value_price_w" value="<?php echo $attributes_values->fields['options_values_price_w']; ?>" size="6">&nbsp;</td>
-// Dual Pricing end
+<!--- Dual Pricing end --->
             <td align="center" class="smallText">&nbsp;<?php echo TABLE_HEADING_OPT_WEIGHT; ?><br /><input type="text" name="products_attributes_weight_prefix" value="<?php echo $attributes_values->fields['products_attributes_weight_prefix']; ?>" size="2">&nbsp;<input type="text" name="products_attributes_weight" value="<?php echo $attributes_values->fields['products_attributes_weight']; ?>" size="6">&nbsp;</td>
             <td align="center" class="smallText">&nbsp;<?php echo TABLE_HEADING_OPT_SORT_ORDER; ?><br /><input type="text" name="products_options_sort_order" value="<?php echo $attributes_values->fields['products_options_sort_order']; ?>" size="4">&nbsp;</td>
             <td align="center" class="smallText">&nbsp;<?php echo TABLE_HEADING_ATTRIBUTES_PRICE_ONETIME; ?><br />&nbsp;<input type="text" name="attributes_price_onetime" value="<?php echo $attributes_values->fields['attributes_price_onetime']; ?>" size="6">&nbsp;</td>
@@ -1573,7 +1572,7 @@ if ($action == '') {
 </table></td></tr>
 
           <tr>
-// Dual Pricing start
+<!--- Dual Pricing start --->
             <td colspan="11"><?php echo zen_black_line(); ?></td>
           </tr>
           <tr>
@@ -1609,7 +1608,7 @@ if ($action == '') {
           </tr>
           <tr>
             <td colspan="11"><?php echo zen_black_line(); ?></td>
-// Dual Pricing end
+<!--- Dual Pricing end --->
           </tr>
           <tr>
 <?php
@@ -1629,9 +1628,9 @@ $attributes_price_final_onetime = $currencies->display_price($attributes_price_f
             <td class="smallText">&nbsp;<?php echo $options_name; ?>&nbsp;</td>
             <td class="smallText">&nbsp;<?php echo ($attributes_values->fields['attributes_image'] != '' ? zen_image(DIR_WS_IMAGES . 'icon_status_yellow.gif') . '&nbsp;' : '&nbsp;&nbsp;') . $values_name; ?>&nbsp;</td>
             <td align="right" class="smallText">&nbsp;<?php echo $attributes_values->fields["price_prefix"]; ?>&nbsp;<?php echo $attributes_values->fields["options_values_price"]; ?>&nbsp;</td>
-// Dual Pricing start
+<!--- Dual Pricing start --->
 	    <td align="right" class="smallText">&nbsp;<?php echo $attributes_values->fields["price_prefix"]; ?>&nbsp;<?php echo $attributes_values->fields["options_values_price_w"]; ?>&nbsp;</td>
-// Dual Pricing end
+<!--- Dual Pricing end --->
             <td align="right" class="smallText">&nbsp;<?php echo $attributes_values->fields["products_attributes_weight_prefix"]; ?>&nbsp;<?php echo $attributes_values->fields["products_attributes_weight"]; ?>&nbsp;</td>
             <td align="right" class="smallText">&nbsp;<?php echo $attributes_values->fields["products_options_sort_order"]; ?>&nbsp;</td>
 <?php
@@ -1730,7 +1729,7 @@ if ($action == '') {
       if ($current_attributes_products_id != $attributes_values->fields['products_id']) {
 ?>
           <tr class="<?php echo (floor($rows/2) == ($rows/2) ? 'attributes-even' : 'attributes-odd'); ?>">
-// Dual Pricing start
+<!--- Dual Pricing start --->
             <td colspan="11"><table width="100%"><td>
               <tr>
                 <td><?php echo zen_draw_separator('pixel_black.gif', '100%', '3'); ?></td>
@@ -1742,7 +1741,7 @@ if ($action == '') {
 ?>
           <tr class="<?php echo (floor($rows/2) == ($rows/2) ? 'attributes-even' : 'attributes-odd'); ?>">
             <td colspan="11"><table width="100%"><td>
-// Dual Pricing end
+<!--- Dual Pricing end --->
               <tr>
                 <td><?php echo zen_draw_separator('pixel_black.gif', '100%', '1'); ?></td>
               </tr>
@@ -1761,15 +1760,15 @@ if ($action == '') {
   if (($action != 'update_attribute' and $action != 'delete_product_attribute')) {
 ?>
           <tr>
-// Dual Pricing end
+<!--- Dual Pricing start --->
             <td colspan="11"><?php echo zen_black_line(); ?></td>
-// Dual Pricing end
+<!--- Dual Pricing end --->
           </tr>
 
 <!-- bof_adding -->
-// Dual Pricing end
+<!--- Dual Pricing start --->
 <tr class="attributeBoxContent"><td colspan="11"><table border="0" width="100%">
-// Dual Pricing end
+<!--- Dual Pricing end --->
 
   <tr class="attributeBoxContent">
     <td class="pageHeading">
@@ -1910,9 +1909,9 @@ $off_overwrite = false;
         <table border="1" cellpadding="4" cellspacing="2">
           <tr>
             <td align="center" class="attributeBoxContent">&nbsp;<?php echo TABLE_HEADING_OPT_PRICE . '<br />'; ?><input type="text" name="price_prefix" size="2" value="<?php echo $default_price_prefix; ?>">&nbsp;<input type="text" name="value_price" size="6">&nbsp;</td>
-// Dual Pricing end
+<!--- Dual Pricing start --->
 	    <td align="center" class="attributeBoxContent">&nbsp;<?php echo TABLE_HEADING_OPT_PRICE_W . '<br />'; ?><input type="text" name="value_price_w" size="6" value="0">&nbsp;</td>
-// Dual Pricing end
+<!--- Dual Pricing end --->
             <td align="center" class="attributeBoxContent">&nbsp;<?php echo TABLE_HEADING_OPT_WEIGHT . '<br />'; ?><input type="text" name="products_attributes_weight_prefix" size="2" value="<?php echo $default_products_attributes_weight_prefix; ?>">&nbsp;<input type="text" name="products_attributes_weight" size="6">&nbsp;</td>
             <td align="center" class="attributeBoxContent">&nbsp;<?php echo TABLE_HEADING_OPT_SORT_ORDER; ?><br /><input type="text" name="products_options_sort_order" value="" size="4">&nbsp;</td>
             <td align="center" class="attributeBoxContent">&nbsp;<?php echo TABLE_HEADING_ATTRIBUTES_PRICE_ONETIME . '<br />'; ?><input type="text" name="attributes_price_onetime" size="6">&nbsp;</td>

@@ -43,9 +43,9 @@ if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
     // Check if email exists
     $check_customer_query = "SELECT customers_id, customers_firstname, customers_lastname, customers_password,
                                     customers_email_address, customers_default_address_id,
-// Dual Pricing start
+/* Dual Pricing start */
                                     customers_authorization, customers_referral, customers_whole
-// Dual Pricing end
+/* Dual Pricing end */
                            FROM " . TABLE_CUSTOMERS . "
                            WHERE customers_email_address = :emailAddress";
 

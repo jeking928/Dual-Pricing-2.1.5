@@ -248,9 +248,9 @@ class order extends base {
 
     $this->content_type = $_SESSION['cart']->get_content_type();
 
-// Dual Pricing start
+/* Dual Pricing start */
     $customer_address_query = "select c.customers_firstname, c.customers_lastname, c.customers_telephone, c.customers_whole,
-// Dual Pricing end
+/* Dual Pricing end */
                                     c.customers_email_address, ab.entry_company, ab.entry_street_address,
                                     ab.entry_suburb, ab.entry_postcode, ab.entry_city, ab.entry_zone_id,
                                     z.zone_name, co.countries_id, co.countries_name,
