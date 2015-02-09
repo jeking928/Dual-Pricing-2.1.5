@@ -2,7 +2,7 @@
 
 /*  Dual Pricing Module text displays */
 
-define('ENTRY_WHOLESALE_PRICING_LEVEL', 'Wholesale pricing level');
+define('ENTRY_WHOLESALE_PRICING_LEVEL', 'Wholesale Pricing Level: ');
 define('NOTES_WHOLESALE_PRICING_LEVEL', '&nbsp; &nbsp; For RETAIL customers this should be 0, for wholesale customers please enter the price band.');
 define('TABLE_HEADING_WHOLESALE', 'Retail/Wholesale');
 define('TEXT_WHOLESALE_PRICE_NET', 'Wholesale Price (Net)');

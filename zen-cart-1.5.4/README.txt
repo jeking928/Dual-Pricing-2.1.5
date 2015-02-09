@@ -1,11 +1,11 @@
-Dual Pricing 2.1.3
+Dual Pricing 2.1.6
 ZenCart 1.5.4
 
 This module replaces group pricing and adds an additional price field to the product as well as allows you to assign "Wholesale" Status to users. Users with Wholesale Status will see the wholesale pricing. You can add multiple levels of wholesale pricing, for example: 20.00-10.00-5.00
 
 THIS REPLACES GROUP PRICING. IF YOU USE GROUP PRICING THEN DON'T USE THIS.
 
-If you're using Zen Cart *other than* 1.5.3, please use the appropriate version of this plugin.  This is *only for* Zen Cart 1.5.3
+If you're using Zen Cart *other than* 1.5.4, please use the appropriate version of this plugin.  This is *only for* Zen Cart 1.5.4
 
 ====================================================================
 Installation
@@ -34,11 +34,11 @@ FAQ's
 How do I use it?
 ---------------------------------
 
-1. To set 4 levels of wholesale pricing, edit the product and change the wholesale price to be a dash separated list, eg. 50.00-30.00-0.00-25.00
+1. To set 4 levels of wholesale pricing, edit the product and change the 'Wholesale Price (Net)' to be a dash separated list, eg. 50.00-30.00-0.00-25.00
 
-2. Attributes can be set in the same way, but you need to enter the prices in the "Wholesale" field and use comma separation, eg. 50.00,30.00,0.00,25,00
+2. A single wholesale price for attributes can be set in the "Wholesale Price" field.
 
-3. Pick a customer and click "edit". You will see a new text box under the email address box. The number should be 0, If you change it to a number above 0 then the customer gets wholesale pricing at that level. 
+3. Pick a customer and click "edit". You will see a new text box 'Wholesale Pricing Level' under the email address box. The number should be 0. If you change it to a number above 0 then the customer will get wholesale pricing at that level. 
 
 ---------------------------------
 How do pricing levels work?
@@ -66,7 +66,7 @@ Find these sets of code and comment them out (there should be 4 of them):
 What about taxes?
 ---------------------------------
 
-By default, your Retail customers (level 0) will be charged sales tax, and wholesale customers (level 1+) will not be charged any sales tax.
+By default, your Retail customers (level 0) will be charged sales tax and wholesale customers (level 1+) will not be charged any sales tax.
 
 If you would like to charge taxes to EVERYONE, then do not include the following file in your installation (or, revert this file back to the original that comes with Zen Cart):
 includes\classes\order.php
@@ -111,17 +111,17 @@ http://www.zen-cart.com/forum/showthread.php?t=35450
 Affected Files
 ====================================================================
 
-admin\includes\functions\functions_prices.php
-admin\includes\languages\english\attributes_controller.php
-admin\includes\languages\english\customers.php
-admin\includes\modules\product\collect_info.php
-admin\includes\modules\products\preview_info.php
-admin\includes\modules\category_product_listing.php
-admin\includes\modules\copy_to_confirm.php
-admin\includes\modules\update_product.php
-admin\attibutes_controller.php
-admin\customers.php
-admin\products_price_manager.php
+YOUR_ADMIN\includes\functions\functions_prices.php
+YOUR_ADMIN\includes\languages\english\attributes_controller.php
+YOUR_ADMIN\includes\languages\english\customers.php
+YOUR_ADMIN\includes\modules\product\collect_info.php
+YOUR_ADMIN\includes\modules\products\preview_info.php
+YOUR_ADMIN\includes\modules\category_product_listing.php
+YOUR_ADMIN\includes\modules\copy_to_confirm.php
+YOUR_ADMIN\includes\modules\update_product.php
+YOUR_ADMIN\attibutes_controller.php
+YOUR_ADMIN\customers.php
+YOUR_ADMIN\products_price_manager.php
 includes\classes\shopping_cart.php
 includes\classes\order.php
 includes\functions\functions_prices.php
@@ -144,7 +144,10 @@ Everyone's support is greatly appreciated.
 ====================================================================
 Changelog
 ====================================================================
-v2.1.3 jeking
+v2.1.6 jeking
+- improved readme, minor language edits
+
+v2.1.5 jeking
 - updated for Zen Cart 1.5.4 compatibility
 
 v2.1.2b jeking
