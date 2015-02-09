@@ -144,10 +144,22 @@ Everyone's support is greatly appreciated.
 ====================================================================
 Changelog
 ====================================================================
+<<<<<<< HEAD
 v2.1.6 jeking
 - improved readme, minor language edits
 
 v2.1.5 jeking
+=======
+v2.1.5b jeking
+- fixes for incorrect comments types
+
+v2.1.5 jeking
+- cleaned up code
+- improved comments
+- updated readme
+
+v2.1.3 jeking
+>>>>>>> origin/development
 - updated for Zen Cart 1.5.4 compatibility
 
 v2.1.2b jeking
